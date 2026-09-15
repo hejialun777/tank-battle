@@ -23,6 +23,40 @@
 
   <main class="stage">
 
+    <!-- 左侧：操作提示，常驻显示 -->
+    <aside class="sidebar side-left">
+      <div class="panel">
+        <div class="label block">操作</div>
+        <ul class="controls">
+          <li>
+            <div class="k">移动</div>
+            <div class="kb"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></div>
+            <div class="kb"><kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></div>
+          </li>
+          <li>
+            <div class="k">开炮</div>
+            <div class="kb"><kbd>空格</kbd><kbd>J</kbd></div>
+          </li>
+          <li>
+            <div class="k">暂停</div>
+            <div class="kb"><kbd>P</kbd></div>
+          </li>
+          <li>
+            <div class="k">静音</div>
+            <div class="kb"><kbd>M</kbd></div>
+          </li>
+          <li>
+            <div class="k">重开</div>
+            <div class="kb"><kbd>R</kbd></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="panel tip">
+        <p>点画面也能<br>开始 / 继续</p>
+      </div>
+    </aside>
+
     <div class="screen">
       <canvas id="game" width="416" height="416"></canvas>
 

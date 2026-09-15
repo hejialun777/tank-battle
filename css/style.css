@@ -40,7 +40,7 @@ body {
 
 #app {
   width: 100%;
-  max-width: 640px;
+  max-width: 762px;   /* 左提示 146 + 间距 14 + 画面 416 + 间距 14 + 右侧栏 ~170 */
 }
 
 /* ---------------------------------------------------------------- 顶栏 --- */
@@ -206,6 +206,56 @@ kbd {
   padding: 11px 12px;
 }
 
+/* ---------------------------------------------------- 左侧：操作提示 --- */
+
+.side-left {
+  flex: 0 0 146px;
+}
+
+.controls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.controls li + li {
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(255, 255, 255, .05);
+}
+
+.controls .k {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+}
+
+.controls .kb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.controls .kb + .kb {
+  margin-top: 3px;
+}
+
+.controls kbd {
+  min-width: 18px;
+  padding: 1px 4px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.tip p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--text-dim);
+  text-align: center;
+}
+
 .stat {
   display: flex;
   align-items: baseline;
@@ -318,10 +368,47 @@ kbd {
 
 /* ------------------------------------------------------------ 自适应 --- */
 
+/* 三栏排不下时，把操作提示挪到画面下方横向铺开，而不是直接藏掉 */
+@media (max-width: 800px) {
+  #app { max-width: 640px; }
+
+  .stage { flex-wrap: wrap; }
+
+  .side-left {
+    order: 3;
+    flex: 1 1 100%;
+  }
+
+  .side-left .controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px 10px;
+  }
+
+  .controls li + li {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .side-left .tip { display: none; }
+}
+
 @media (max-width: 620px) {
   body { padding: 14px 10px 22px; }
 
-  .stage { flex-direction: column; align-items: stretch; }
+  /* 注意：column + wrap 会让元素改成往"新的一列"里排，直接横向溢出，
+     所以这里必须显式关掉 wrap */
+  .stage {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+
+  /* 单列排布时主轴上不再是宽度，别让 100% 的 flex-basis 捣乱 */
+  .side-left { flex: 0 0 auto; }
+
+  .side-left .controls { grid-template-columns: repeat(2, 1fr); }
 
   #game {
     width: 100%;
