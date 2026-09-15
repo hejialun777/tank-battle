@@ -2,6 +2,8 @@
 
 纯 HTML5 Canvas 写的经典坦克大战复刻，**零依赖、零构建**，双击 `index.html` 就能玩。
 
+🔗 **在线试玩：<https://hejialun777.github.io/tank-battle/>**
+
 ![HTML5](https://img.shields.io/badge/HTML5-Canvas-e34f26)
 ![No Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -78,7 +80,9 @@ npx serve
 
 ### 部署到 GitHub Pages
 
-仓库根目录就是站点根目录，直接在 **Settings → Pages** 里把 Source 选成 `main` 分支的 `/ (root)` 即可。
+已经开好了，站点地址：<https://hejialun777.github.io/tank-battle/>
+
+仓库根目录就是站点根目录。如果你 fork 了一份想自己部署，在 **Settings → Pages** 里把 Source 选成 `main` 分支的 `/ (root)` 即可（注意：**私有仓库开不了 Pages**，需要仓库是公开的）。
 
 ---
 
