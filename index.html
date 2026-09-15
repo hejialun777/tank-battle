@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>坦克大战 · Tank Battle</title>
+<meta name="description" content="纯 HTML5 Canvas 实现的经典坦克大战，无需任何依赖，打开即玩。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23131820'/%3E%3Crect x='6' y='9' width='5' height='16' fill='%23b7841f'/%3E%3Crect x='21' y='9' width='5' height='16' fill='%23b7841f'/%3E%3Crect x='11' y='12' width='10' height='12' fill='%23f2c14e'/%3E%3Crect x='14' y='2' width='4' height='11' fill='%23f2c14e'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <header class="topbar">
+    <h1>坦克大战 <span>TANK BATTLE</span></h1>
+    <div class="topbar-actions">
+      <button id="btn-pause" type="button" title="暂停 / 继续 (P)">暂停</button>
+      <button id="btn-mute"  type="button" title="音效开关 (M)">🔊 音效</button>
+      <button id="btn-restart" type="button" title="重新开始 (R)">重开</button>
+    </div>
+  </header>
+
+  <main class="stage">
+
+    <div class="screen">
+      <canvas id="game" width="416" height="416"></canvas>
+
+      <div id="overlay" class="overlay">
+        <div class="overlay-card">
+          <h2 id="ov-title">坦克大战</h2>
+          <p  id="ov-text">保卫基地，消灭所有敌方坦克。</p>
+          <ul id="ov-keys" class="keys">
+            <li><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> / <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> 移动</li>
+            <li><kbd>空格</kbd> / <kbd>J</kbd> 开炮</li>
+            <li><kbd>P</kbd> 暂停　<kbd>M</kbd> 静音　<kbd>R</kbd> 重开</li>
+          </ul>
+          <button id="ov-btn" class="primary" type="button">开始游戏</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="panel">
+        <div class="stat">
+          <span class="label">分数</span>
+          <span class="value" id="ui-score">0</span>
+        </div>
+        <div class="stat">
+          <span class="label">关卡</span>
+          <span class="value" id="ui-level">1 / 4</span>
+        </div>
+        <div class="stat">
+          <span class="label">剩余生命</span>
+          <span class="value" id="ui-lives">♥♥♥</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="label block">剩余敌人</div>
+        <div class="enemy-grid" id="ui-enemies"></div>
+      </div>
+
+      <div class="panel">
+        <div class="label block">火力等级</div>
+        <div class="stars" id="ui-stars">
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <div class="panel hint">
+        <p><b>道具</b></p>
+        <p><span class="dot star"></span>★ 火力升级</p>
+        <p><span class="dot helmet"></span>⛑ 无敌护盾</p>
+        <p><span class="dot clock"></span>⏱ 冻结敌人</p>
+        <p><span class="dot shovel"></span>⛏ 基地钢墙</p>
+        <p><span class="dot tank"></span>🚩 额外生命</p>
+        <p><span class="dot grenade"></span>💥 全屏轰炸</p>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="foot">
+    <span>纯 Canvas · 零依赖 · 打开即玩</span>
+  </footer>
+
+</div>
+
+<!-- 按依赖顺序加载（非 ES Module，可直接用 file:// 打开） -->
+<script src="js/utils.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/input.js"></script>
+<script src="js/levels.js"></script>
+<script src="js/map.js"></script>
+<script src="js/effects.js"></script>
+<script src="js/bullet.js"></script>
+<script src="js/powerup.js"></script>
+<script src="js/tank.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

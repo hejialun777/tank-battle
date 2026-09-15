@@ -1,0 +1,9 @@
+# 统一换行符，避免 Windows / macOS 协作时整个文件显示成"被改过"
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

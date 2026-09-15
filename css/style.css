@@ -1,0 +1,339 @@
+/* ==========================================================================
+   坦克大战 —— 界面样式
+   游戏本体全部画在 canvas 上，这里只负责外壳（顶栏 / 侧栏 / 遮罩层）
+   ========================================================================== */
+
+:root {
+  --bg:        #0b0e13;
+  --bg-soft:   #131820;
+  --panel:     #171d27;
+  --line:      #262f3d;
+  --text:      #dbe3ee;
+  --text-dim:  #7d8a9c;
+  --accent:    #f2c14e;
+  --accent-2:  #62d0ff;
+  --danger:    #ff6b5a;
+  --radius:    10px;
+  --font: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1100px 620px at 50% -12%, #1b2433 0%, transparent 62%),
+    var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  padding: 22px 16px 30px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  width: 100%;
+  max-width: 640px;
+}
+
+/* ---------------------------------------------------------------- 顶栏 --- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 19px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.topbar h1 span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 7px;
+}
+
+button {
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 6px 11px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, transform .06s;
+}
+
+button:hover  { background: #1e2633; border-color: #3a4759; }
+button:active { transform: translateY(1px); }
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #21180a;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 30px;
+  border-radius: 9px;
+}
+
+button.primary:hover { background: #ffd166; border-color: #ffd166; }
+
+/* ---------------------------------------------------------------- 舞台 --- */
+
+.stage {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.screen {
+  position: relative;
+  flex: 0 0 auto;
+  line-height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #05070a;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .55);
+}
+
+#game {
+  display: block;
+  width: 416px;
+  height: 416px;
+  touch-action: none;
+}
+
+/* -------------------------------------------------------------- 遮罩层 --- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5, 8, 12, .82);
+  backdrop-filter: blur(3px);
+  line-height: 1.5;
+  transition: opacity .18s;
+}
+
+.overlay.hidden { display: none; }
+
+.overlay-card {
+  text-align: center;
+  padding: 20px 22px;
+  max-width: 330px;
+}
+
+.overlay-card h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
+
+.overlay-card p {
+  margin: 0 0 14px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+
+.keys {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 12px;
+  background: rgba(255, 255, 255, .035);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.keys li + li { margin-top: 6px; }
+
+kbd {
+  display: inline-block;
+  min-width: 20px;
+  padding: 1px 5px;
+  background: #232c3a;
+  border: 1px solid #39465a;
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--text);
+}
+
+/* ---------------------------------------------------------------- 侧栏 --- */
+
+.sidebar {
+  flex: 1 1 150px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 11px 12px;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.stat + .stat { margin-top: 8px; }
+
+.label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+
+.label.block { margin-bottom: 8px; }
+
+.value {
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+#ui-lives { color: var(--danger); letter-spacing: 2px; font-size: 14px; }
+
+/* 剩余敌人图标 */
+.enemy-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 4px;
+}
+
+.enemy-grid i {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  background: #39465a;
+}
+
+.enemy-grid i.basic   { background: #b9c2cc; }
+.enemy-grid i.fast    { background: #7fd8ff; }
+.enemy-grid i.power   { background: #a6e26b; }
+.enemy-grid i.armor   { background: #ff8a6b; }
+
+/* 火力星级 */
+.stars { display: flex; gap: 5px; }
+
+.stars i {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #232c3a;
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.stars i.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.stars i.on::after {
+  content: "★";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #21180a;
+  font-style: normal;
+}
+
+/* 道具说明 */
+.hint p {
+  margin: 0 0 5px;
+  font-size: 11px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hint p:last-child { margin-bottom: 0; }
+.hint p b { color: var(--text); font-size: 11px; }
+
+.dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  flex: 0 0 auto;
+}
+
+.dot.star    { background: #f2c14e; }
+.dot.helmet  { background: #62d0ff; }
+.dot.clock   { background: #b18cff; }
+.dot.shovel  { background: #9aa6b5; }
+.dot.tank    { background: #7ee787; }
+.dot.grenade { background: #ff6b5a; }
+
+/* ---------------------------------------------------------------- 页脚 --- */
+
+.foot {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 11px;
+  color: #4d5768;
+}
+
+/* ------------------------------------------------------------ 自适应 --- */
+
+@media (max-width: 620px) {
+  body { padding: 14px 10px 22px; }
+
+  .stage { flex-direction: column; align-items: stretch; }
+
+  #game {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar .panel { flex: 1 1 130px; }
+  .sidebar .hint  { display: none; }
+}
