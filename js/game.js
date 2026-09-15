@@ -714,30 +714,59 @@
       return;
     }
 
-    // 老鹰
-    ctx.fillStyle = '#c9a227';
+    // 老鹰：翅膀 + 身体 + 带喙的头。
+    // 不要画成五角星 —— 会跟"★ 火力升级"道具撞脸。
+    var ey = cy - 1;
+
+    // 双翼（斜向上展开）
+    ctx.fillStyle = '#a8821c';
     ctx.beginPath();
-    ctx.moveTo(cx, r.y + 4);
-    ctx.lineTo(cx + 4, r.y + 10);
-    ctx.lineTo(cx + 12, r.y + 8);
-    ctx.lineTo(cx + 7, r.y + 15);
-    ctx.lineTo(cx + 11, r.y + 26);
-    ctx.lineTo(cx, r.y + 21);
-    ctx.lineTo(cx - 11, r.y + 26);
-    ctx.lineTo(cx - 7, r.y + 15);
-    ctx.lineTo(cx - 12, r.y + 8);
-    ctx.lineTo(cx - 4, r.y + 10);
+    ctx.moveTo(cx - 2, ey - 4);
+    ctx.lineTo(cx - 14, ey - 10);
+    ctx.lineTo(cx - 12, ey + 1);
+    ctx.lineTo(cx - 3, ey + 3);
+    ctx.closePath();
+
+    ctx.moveTo(cx + 2, ey - 4);
+    ctx.lineTo(cx + 14, ey - 10);
+    ctx.lineTo(cx + 12, ey + 1);
+    ctx.lineTo(cx + 3, ey + 3);
     ctx.closePath();
     ctx.fill();
 
-    ctx.fillStyle = '#ffe08a';
+    // 身体（上宽下尖）
+    ctx.fillStyle = '#e2c257';
     ctx.beginPath();
-    ctx.arc(cx, r.y + 9, 3.2, 0, Math.PI * 2);
+    ctx.moveTo(cx, ey - 8);
+    ctx.lineTo(cx + 5, ey + 2);
+    ctx.lineTo(cx, ey + 12);
+    ctx.lineTo(cx - 5, ey + 2);
+    ctx.closePath();
+    ctx.fill();
+
+    // 头
+    ctx.beginPath();
+    ctx.arc(cx, ey - 10, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 喙
+    ctx.fillStyle = '#ffcf5c';
+    ctx.beginPath();
+    ctx.moveTo(cx + 3, ey - 11.5);
+    ctx.lineTo(cx + 8.5, ey - 9);
+    ctx.lineTo(cx + 3, ey - 6.5);
+    ctx.closePath();
+    ctx.fill();
+
+    // 眼睛
+    ctx.fillStyle = '#2a2118';
+    ctx.beginPath();
+    ctx.arc(cx + 1, ey - 11, 1.3, 0, Math.PI * 2);
     ctx.fill();
 
     // 底座阴影
     ctx.fillStyle = 'rgba(0,0,0,.35)';
-    ctx.fillRect(r.x + 4, r.y + 26, 24, 3);
+    ctx.fillRect(r.x + 5, r.y + 27, 22, 3);
   };
 
   Game.prototype.drawPowerUps = function (ctx) {

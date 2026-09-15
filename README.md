@@ -6,6 +6,8 @@
 ![No Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+![游戏截图](screenshot.png)
+
 ---
 
 ## 玩法
